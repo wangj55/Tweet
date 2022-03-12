@@ -28,7 +28,7 @@ class TwitterAPICaller: BDBOAuth1SessionManager {
         loginFailure = failure
         TwitterAPICaller.client?.deauthorize()
         TwitterAPICaller.client?.fetchRequestToken(withPath: url, method: "GET", callbackURL: URL(string: "alamoTwitter://oauth"), scope: nil, success: { (requestToken: BDBOAuth1Credential!) -> Void in
-            let url = URL(string: "https://api.twitter.com/oauth/authorize?oauth_token=\(requestToken.token!)")!
+            let url = URL(string: "https://api.twitter.com/oauth/authorize?oauth_token=\(APIToken().token)")!
             UIApplication.shared.open(url)
         }, failure: { (error: Error!) -> Void in
             print("Error: \(error.localizedDescription)")
