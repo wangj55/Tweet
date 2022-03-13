@@ -14,10 +14,10 @@
         </array>
     </customFonts>
     <scenes>
-        <!--View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="RkF-Br-rTh">
             <objects>
-                <viewController id="g7h-x0-mi0" sceneMemberID="viewController">
+                <viewController id="g7h-x0-mi0" customClass="LoginViewController" customModule="Twitter" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7xg-aN-96O">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -51,6 +51,9 @@
                                     </attributedString>
                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="onLoginButton:" destination="g7h-x0-mi0" eventType="touchUpInside" id="fYS-m1-O9I"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="See what's happening  in the world right now." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GYG-sK-ZxY">
                                 <rect key="frame" x="47" y="310.5" width="320" height="75"/>
@@ -74,6 +77,9 @@
                             <constraint firstItem="GYG-sK-ZxY" firstAttribute="centerY" secondItem="7xg-aN-96O" secondAttribute="centerY" constant="-100" id="lGX-wS-dld"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <segue destination="avA-A6-d6w" kind="presentation" identifier="loginToHome" id="4Hi-QW-icH"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jbh-r7-bzU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -111,7 +117,7 @@
         <!--Navigation Controller-->
         <scene sceneID="qRw-Hw-G43">
             <objects>
-                <navigationController id="avA-A6-d6w" sceneMemberID="viewController">
+                <navigationController modalPresentationStyle="fullScreen" id="avA-A6-d6w" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="zjp-ZD-Bih">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
