@@ -83,12 +83,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jbh-r7-bzU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-500.00000000000006" y="-507.58928571428567"/>
+            <point key="canvasLocation" x="-2972" y="204"/>
         </scene>
-        <!--Root View Controller-->
+        <!--Home-->
         <scene sceneID="Drc-kh-Nsh">
             <objects>
-                <tableViewController id="Iwu-BC-k8J" sceneMemberID="viewController">
+                <tableViewController id="Iwu-BC-k8J" customClass="HomeTableTableViewController" customModule="Twitter" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="BO9-pT-BSX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -108,11 +108,18 @@
                             <outlet property="delegate" destination="Iwu-BC-k8J" id="gGW-7A-bq1"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="ZqI-bL-JhM"/>
+                    <navigationItem key="navigationItem" title="Home" id="ZqI-bL-JhM">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="VJR-5T-sqI">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="onLogout:" destination="Iwu-BC-k8J" id="zSN-71-HJl"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jiy-lQ-7GC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-500" y="921"/>
+            <point key="canvasLocation" x="-1246" y="204"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="qRw-Hw-G43">
@@ -121,6 +128,12 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="zjp-ZD-Bih">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <navigationBarAppearance key="scrollEdgeAppearance">
+                            <color key="backgroundColor" red="0.0" green="0.67450980390000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <textAttributes key="titleTextAttributes">
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </textAttributes>
+                        </navigationBarAppearance>
                     </navigationBar>
                     <connections>
                         <segue destination="Iwu-BC-k8J" kind="relationship" relationship="rootViewController" id="23S-Ip-2jX"/>
@@ -128,7 +141,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZSK-Xz-Jce" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-500" y="204"/>
+            <point key="canvasLocation" x="-2120" y="204"/>
         </scene>
     </scenes>
     <resources>
