@@ -12,10 +12,13 @@ class HomeTableTableViewController: UITableViewController {
     var tweetArray = [NSDictionary]()
     var numberOfTweets: Int!
 
+    let myRefreshControl = UIRefreshControl()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
         loadTweets()
+        myRefreshControl.addTarget(self, action: #selector(loadTweets), for: .valueChanged)
+        tableView.refreshControl = myRefreshControl
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -24,7 +27,7 @@ class HomeTableTableViewController: UITableViewController {
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
-    func loadTweets() {
+    @objc func loadTweets() {
         let myUrl = "https://api.twitter.com/1.1/statuses/home_timeline.json"
         let myParams = ["count": 10]
 
@@ -35,6 +38,7 @@ class HomeTableTableViewController: UITableViewController {
                 self.tweetArray.append(tweet)
             }
             self.tableView.reloadData()
+            self.myRefreshControl.endRefreshing()
 
         }, failure: { error in
             print(error.localizedDescription)
@@ -50,17 +54,17 @@ class HomeTableTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "tweetCell", for: indexPath) as! TweetTableViewCell
-        
+
         let tweet = tweetArray[indexPath.row]
         let user = tweet["user"] as! NSDictionary
         let profileImageUrl = URL(string: (user["profile_image_url_https"] as? String)!)
-        
+
         cell.userNameLabel.text = user["name"] as? String
         cell.tweetTextLabel.text = tweet["text"] as? String
         if let imageData = try? Data(contentsOf: profileImageUrl!) {
             cell.profileImageView.image = UIImage(data: imageData)
         }
-        
+
         return cell
     }
 
