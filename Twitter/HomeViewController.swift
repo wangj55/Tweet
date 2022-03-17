@@ -10,24 +10,22 @@ import UIKit
 
 class HomeViewController: UITableViewController {
     var tweetArray = [NSDictionary]()
-    var numberOfTweets: Int!
-
+    var numberOfTweets: Int = 20
     let myRefreshControl = UIRefreshControl()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        numberOfTweets = 20
         loadTweets()
         myRefreshControl.addTarget(self, action: #selector(loadTweets), for: .valueChanged)
-        self.tableView.refreshControl = myRefreshControl
-        self.tableView.rowHeight = UITableView.automaticDimension
-        self.tableView.estimatedRowHeight = 150
+        tableView.refreshControl = myRefreshControl
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 150
 
-            // Uncomment the following line to preserve selection between presentations
-            // self.clearsSelectionOnViewWillAppear = false
+        // Uncomment the following line to preserve selection between presentations
+        // self.clearsSelectionOnViewWillAppear = false
 
-            // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-            // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -79,11 +77,11 @@ class HomeViewController: UITableViewController {
         cell.tweetId = tweet["id"] as? Int ?? -1
         cell.userNameLabel.text = user["name"] as? String
         cell.tweetTextLabel.text = tweet["text"] as? String
-        
+
         if let imageData = try? Data(contentsOf: profileImageUrl!) {
             cell.profileImageView.image = UIImage(data: imageData)
         }
-        
+
         cell.favorited = tweetArray[indexPath.row]["favorited"] as? Bool ?? false
         cell.retweeted = tweetArray[indexPath.row]["retweeted"] as? Bool ?? false
 

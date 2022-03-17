@@ -14,12 +14,12 @@ class TweetTableViewCell: UITableViewCell {
     @IBOutlet var tweetTextLabel: UILabel!
     @IBOutlet var retweetButton: UIButton!
     @IBOutlet var favoriteButton: UIButton!
-    
+
     var tweetId: Int = -1
-    
+
     var favorited: Bool = false
     var retweeted: Bool = false
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -31,17 +31,26 @@ class TweetTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    @IBAction func retweet(_ sender: Any) {}
-    
-    /// Change favorite icon. If current is grey, change to green, vice versa.
-    func changeRetweetIcon() {
-        if retweeted {
-            retweetButton.setImage(UIImage(named: "retweet-icon-green"), for: UIControl.State.normal)
+    @IBAction func retweet(_ sender: Any) {
+        if !retweeted {
+            TwitterAPICaller.client?.retweet(tweetId: tweetId, success: {
+                self.retweetButton.setImage(UIImage(named: "retweet-icon-green"), for: UIControl.State.normal)
+                self.retweeted = true
+            }, failure: { error in
+                print("Retweet failed.")
+                print(error.localizedDescription)
+            })
         } else {
-            retweetButton.setImage(UIImage(named: "retweet-icon"), for: UIControl.State.normal)
+            TwitterAPICaller.client?.unretweet(tweetId: tweetId, success: {
+                self.retweetButton.setImage(UIImage(named: "retweet-icon"), for: UIControl.State.normal)
+                self.retweeted = false
+            }, failure: { error in
+                print("Retweet failed.")
+                print(error.localizedDescription)
+            })
         }
     }
-    
+
     @IBAction func favoriteTweetButtonClicked(_ sender: Any) {
         if !favorited {
             TwitterAPICaller.client?.favoriteTweet(tweetId: tweetId, success: {
