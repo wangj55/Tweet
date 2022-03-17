@@ -13,6 +13,7 @@ class TweetViewController: UIViewController, UITextViewDelegate {
     @IBOutlet var tweetButton: UIBarButtonItem!
     @IBOutlet var wordCountLabel: UILabel!
     let characterLimit: Int = 280
+    var twitterBlue: UIColor!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +21,7 @@ class TweetViewController: UIViewController, UITextViewDelegate {
         tweetText.becomeFirstResponder()
         tweetText.delegate = self
         wordCountLabel.text = "\(tweetText.text.count)/\(characterLimit)"
+        twitterBlue = wordCountLabel.textColor
     }
 
     @IBAction func cancel(_ sender: Any) {
@@ -50,6 +52,7 @@ class TweetViewController: UIViewController, UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let newText = NSString(string: textView.text).replacingCharacters(in: range, with: text)
         wordCountLabel.text = "\(newText.count)/\(characterLimit)"
+        wordCountLabel.textColor = newText.count == characterLimit ? .red : self.twitterBlue
         return newText.count < characterLimit
     }
 
