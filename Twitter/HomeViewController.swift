@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeTableTableViewController: UITableViewController {
+class HomeViewController: UITableViewController {
     var tweetArray = [NSDictionary]()
     var numberOfTweets: Int!
 
@@ -19,18 +19,20 @@ class HomeTableTableViewController: UITableViewController {
         numberOfTweets = 20
         loadTweets()
         myRefreshControl.addTarget(self, action: #selector(loadTweets), for: .valueChanged)
-        tableView.refreshControl = myRefreshControl
+        self.tableView.refreshControl = myRefreshControl
+        self.tableView.rowHeight = UITableView.automaticDimension
+        self.tableView.estimatedRowHeight = 150
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+            // Uncomment the following line to preserve selection between presentations
+            // self.clearsSelectionOnViewWillAppear = false
 
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+            // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+            // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.loadTweets()
+        loadTweets()
     }
 
     @objc func loadTweets() {
@@ -44,7 +46,7 @@ class HomeTableTableViewController: UITableViewController {
                 self.tweetArray.append(tweet)
             }
             self.tableView.reloadData()
-            
+
             // stop refreshing since tweets are loaded
             if self.myRefreshControl.isRefreshing {
                 self.myRefreshControl.endRefreshing()
@@ -74,11 +76,16 @@ class HomeTableTableViewController: UITableViewController {
         let user = tweet["user"] as! NSDictionary
         let profileImageUrl = URL(string: (user["profile_image_url_https"] as? String)!)
 
+        cell.tweetId = tweet["id"] as? Int ?? -1
         cell.userNameLabel.text = user["name"] as? String
         cell.tweetTextLabel.text = tweet["text"] as? String
+        
         if let imageData = try? Data(contentsOf: profileImageUrl!) {
             cell.profileImageView.image = UIImage(data: imageData)
         }
+        
+        cell.favorited = tweetArray[indexPath.row]["favorited"] as? Bool ?? false
+        cell.retweeted = tweetArray[indexPath.row]["retweeted"] as? Bool ?? false
 
         return cell
     }
