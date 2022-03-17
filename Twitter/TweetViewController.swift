@@ -8,19 +8,24 @@
 
 import UIKit
 
-class TweetViewController: UIViewController {
+class TweetViewController: UIViewController, UITextViewDelegate {
     @IBOutlet var tweetText: UITextView!
     @IBOutlet var tweetButton: UIBarButtonItem!
+    @IBOutlet var wordCountLabel: UILabel!
+    let characterLimit: Int = 280
 
     override func viewDidLoad() {
         super.viewDidLoad()
         tweetText.becomeFirstResponder()
+        tweetText.delegate = self
+        wordCountLabel.text = "\(tweetText.text.count)/\(characterLimit)"
     }
 
     @IBAction func cancel(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
 
+    /// Post tweet.
     @IBAction func tweet(_ sender: Any) {
         if !tweetText.text.isEmpty {
             TwitterAPICaller.client?.postTweet(tweetString: tweetText.text, success: {
@@ -33,6 +38,12 @@ class TweetViewController: UIViewController {
             // https://stackoverflow.com/questions/34206648/how-to-disable-a-button-if-a-text-field-is-empty
             dismiss(animated: true, completion: nil)
         }
+    }
+
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let newText = NSString(string: textView.text).replacingCharacters(in: range, with: text)
+        wordCountLabel.text = "\(newText.count)/\(characterLimit)"
+        return newText.count < characterLimit
     }
 
     /*
