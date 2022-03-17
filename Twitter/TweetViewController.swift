@@ -48,7 +48,7 @@ class TweetViewController: UIViewController, UITextViewDelegate {
         }
     }
 
-    /// Manages the word limit of tweet.
+    /// Manages the word limit of tweet and the color of word-counting label.
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let newText = NSString(string: textView.text).replacingCharacters(in: range, with: text)
         wordCountLabel.text = "\(newText.count)/\(characterLimit)"
