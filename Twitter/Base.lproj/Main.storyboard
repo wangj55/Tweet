@@ -190,7 +190,7 @@
                                 <action selector="onLogout:" destination="Iwu-BC-k8J" id="zSN-71-HJl"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Tweet" style="plain" id="o2h-La-fCW">
+                        <barButtonItem key="rightBarButtonItem" image="edit-icon" style="plain" id="o2h-La-fCW">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <segue destination="Y6W-us-7Oq" kind="presentation" id="QTW-Jp-vPh"/>
@@ -312,6 +312,7 @@
     </scenes>
     <resources>
         <image name="TwitterLogoBlue" width="200" height="200"/>
+        <image name="edit-icon" width="30" height="27"/>
         <image name="favor-icon" width="30" height="30"/>
         <image name="retweet-icon" width="30" height="30"/>
         <systemColor name="labelColor">
