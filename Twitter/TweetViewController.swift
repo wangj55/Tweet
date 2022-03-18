@@ -72,6 +72,8 @@ class TweetViewController: UIViewController, UITextViewDelegate {
 
             view.endEditing(true)
             present(saveAlert, animated: true, completion: nil)
+        } else {
+            self.dismiss(animated: true, completion: nil)
         }
     }
 
